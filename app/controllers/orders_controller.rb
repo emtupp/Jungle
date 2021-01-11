@@ -4,6 +4,11 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def line_item
+    @line_item ||= @order.line_items.map {|line_item| { product: Product.find_by(id: line_item.product_id), quantity: line_item.quantity } }
+  end
+  helper_method :line_item
+
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
