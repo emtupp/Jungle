@@ -77,6 +77,11 @@ RSpec.describe User, type: :model do
       expect(User.authenticate_with_credentials('', '')).to eq(nil)
     end
 
+    # it "does NOT have case sensitive email" do
+    #   @user = User.new(name: 'User 1', email: 'TEXT@TEXT.COM', password: 'password', password_confirmation: 'password').save
+    #   expect(User.authenticate_with_credentials('text@text.com', 'password')).not_to eq(nil)
+    # end
+
     it "does NOT read trailing and leading spaces in email" do
       @user = User.new(name: 'User 1', email: 'TEXT@TEXT.COM', password: 'password', password_confirmation: 'password').save
       expect(User.authenticate_with_credentials('   TEXT@TEXT.COM   ', 'password')).not_to eq(nil)
